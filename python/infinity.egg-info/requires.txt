@@ -1,0 +1,10 @@
+sqlglot==11.7.1
+pydantic
+thrift
+setuptools
+pytest
+pandas
+numpy
+pyarrow
+openpyxl
+polars

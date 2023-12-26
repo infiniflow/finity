@@ -1,0 +1,49 @@
+[general]
+version                 = "0.1.0"
+timezone                = "utc-8"
+listen_address          = "0.0.0.0"
+pg_port                 = 5432
+http_port               = 8088
+sdk_port                = 23817
+
+[system]
+# 0 means use all cpus
+worker_cpu_limit        = 0
+# 0 means use all memory
+total_memory_size       = "8GB"
+# memory limit per query
+query_memory_limit      = 0
+# query cpu limit per query
+query_cpu_limit         = "4MB"
+
+[profiler]
+enable                  = false
+profile_record_capacity = 100
+
+[log]
+log_filename            = "infinity.log"
+log_dir                 = "/var/infinity/log"
+log_to_stdout           = false
+log_max_size           = "10GB"
+log_file_rotate_count   = 10
+
+# trace/info/warning/error/critical 5 log levels, default: info
+log_level               = "info"
+
+[storage]
+data_dir                = "/var/infinity/data"
+wal_dir                 = "/var/infinity/wal"
+default_row_size        = 8192
+
+[buffer]
+buffer_pool_size        = "4GB"
+temp_dir                = "/var/infinity/temp"
+
+[wal]
+full_checkpoint_interval_sec      = 86400
+delta_checkpoint_interval_sec     = 60
+delta_checkpoint_interval_wal_bytes      = 1000000000
+wal_file_size_threshold            = "1GB"
+
+[resource]
+dictionary_dir                = "/var/infinity/resource"

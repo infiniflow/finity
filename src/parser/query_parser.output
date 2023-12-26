@@ -1,0 +1,676 @@
+Terminals unused in grammar
+
+    FN_PREFIX
+
+
+Grammar
+
+    0 $accept: topLevelQuery "end of file"
+
+    1 topLevelQuery: query "end of file"
+
+    2 query: clause
+    3      | query clause
+    4      | query OR clause
+
+    5 clause: term
+    6       | clause AND term
+
+    7 term: basic_filter_boost
+    8     | NOT term
+    9     | LPAREN query RPAREN
+   10     | LPAREN query RPAREN CARAT
+
+   11 basic_filter_boost: basic_filter
+   12                   | basic_filter CARAT
+
+   13 basic_filter: STRING
+   14             | rangeExpr
+   15             | regexExpr
+   16             | fuzzyExpr
+   17             | STRING OP_COLON STRING
+   18             | STRING OP_COLON rangeExpr
+   19             | STRING OP_COLON regexExpr
+   20             | STRING OP_COLON fuzzyExpr
+
+   21 rangeExpr: opCompare STRING
+   22          | rangeStart boundVal RANGE_TO boundVal rangeEnd
+
+   23 opCompare: OP_EQUAL
+   24          | OP_LESSTHAN
+   25          | OP_MORETHAN
+   26          | OP_LESSTHANEQ
+   27          | OP_MORETHANEQ
+
+   28 rangeStart: RANGEIN_START
+   29           | RANGEEX_START
+
+   30 rangeEnd: RANGEIN_END
+   31         | RANGEEX_END
+
+   32 boundVal: STRING
+   33         | ε
+
+   34 regexExpr: REGEXPTERM
+
+   35 fuzzyExpr: STRING TILDE
+
+
+Terminals, with rules where they appear
+
+    "end of file" (0) 0 1
+    error (256)
+    AND (258) 6
+    OR (259) 4
+    NOT (260) 8
+    FN_PREFIX (261)
+    LPAREN (262) 9 10
+    RPAREN (263) 9 10
+    OP_COLON (264) 17 18 19 20
+    OP_EQUAL (265) 23
+    OP_LESSTHAN (266) 24
+    OP_LESSTHANEQ (267) 26
+    OP_MORETHAN (268) 25
+    OP_MORETHANEQ (269) 27
+    RANGEIN_START (270) 28
+    RANGEIN_END (271) 30
+    RANGEEX_START (272) 29
+    RANGEEX_END (273) 31
+    RANGE_TO (274) 22
+    CARAT <float> (275) 10 12
+    TILDE <int> (276) 35
+    REGEXPTERM <std::string> (277) 34
+    STRING <std::string> (278) 13 17 18 19 20 21 32 35
+
+
+Nonterminals, with rules where they appear
+
+    $accept (24)
+        on left: 0
+    topLevelQuery <std::unique_ptr<irs::filter>> (25)
+        on left: 1
+        on right: 0
+    query <std::unique_ptr<irs::filter>> (26)
+        on left: 2 3 4
+        on right: 1 3 4 9 10
+    clause <std::unique_ptr<irs::filter>> (27)
+        on left: 5 6
+        on right: 2 3 4 6
+    term <std::unique_ptr<irs::filter>> (28)
+        on left: 7 8 9 10
+        on right: 5 6 8
+    basic_filter_boost <std::unique_ptr<irs::filter>> (29)
+        on left: 11 12
+        on right: 7
+    basic_filter <std::unique_ptr<irs::filter>> (30)
+        on left: 13 14 15 16 17 18 19 20
+        on right: 11 12
+    rangeExpr <std::unique_ptr<irs::filter>> (31)
+        on left: 21 22
+        on right: 14 18
+    opCompare <int> (32)
+        on left: 23 24 25 26 27
+        on right: 21
+    rangeStart <int> (33)
+        on left: 28 29
+        on right: 22
+    rangeEnd <int> (34)
+        on left: 30 31
+        on right: 22
+    boundVal <std::string> (35)
+        on left: 32 33
+        on right: 22
+    regexExpr <std::unique_ptr<irs::filter>> (36)
+        on left: 34
+        on right: 15 19
+    fuzzyExpr <std::unique_ptr<irs::filter>> (37)
+        on left: 35
+        on right: 16 20
+
+
+State 0
+
+    0 $accept: • topLevelQuery "end of file"
+
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    topLevelQuery       go to state 12
+    query               go to state 13
+    clause              go to state 14
+    term                go to state 15
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 1
+
+    8 term: NOT • term
+
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    term                go to state 23
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 2
+
+    9 term: LPAREN • query RPAREN
+   10     | LPAREN • query RPAREN CARAT
+
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    query               go to state 24
+    clause              go to state 14
+    term                go to state 15
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 3
+
+   23 opCompare: OP_EQUAL •
+
+    $default  reduce using rule 23 (opCompare)
+
+
+State 4
+
+   24 opCompare: OP_LESSTHAN •
+
+    $default  reduce using rule 24 (opCompare)
+
+
+State 5
+
+   26 opCompare: OP_LESSTHANEQ •
+
+    $default  reduce using rule 26 (opCompare)
+
+
+State 6
+
+   25 opCompare: OP_MORETHAN •
+
+    $default  reduce using rule 25 (opCompare)
+
+
+State 7
+
+   27 opCompare: OP_MORETHANEQ •
+
+    $default  reduce using rule 27 (opCompare)
+
+
+State 8
+
+   28 rangeStart: RANGEIN_START •
+
+    $default  reduce using rule 28 (rangeStart)
+
+
+State 9
+
+   29 rangeStart: RANGEEX_START •
+
+    $default  reduce using rule 29 (rangeStart)
+
+
+State 10
+
+   34 regexExpr: REGEXPTERM •
+
+    $default  reduce using rule 34 (regexExpr)
+
+
+State 11
+
+   13 basic_filter: STRING •
+   17             | STRING • OP_COLON STRING
+   18             | STRING • OP_COLON rangeExpr
+   19             | STRING • OP_COLON regexExpr
+   20             | STRING • OP_COLON fuzzyExpr
+   35 fuzzyExpr: STRING • TILDE
+
+    OP_COLON  shift, and go to state 25
+    TILDE     shift, and go to state 26
+
+    $default  reduce using rule 13 (basic_filter)
+
+
+State 12
+
+    0 $accept: topLevelQuery • "end of file"
+
+    "end of file"  shift, and go to state 27
+
+
+State 13
+
+    1 topLevelQuery: query • "end of file"
+    3 query: query • clause
+    4      | query • OR clause
+
+    "end of file"  shift, and go to state 28
+    OR             shift, and go to state 29
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    clause              go to state 30
+    term                go to state 15
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 14
+
+    2 query: clause •
+    6 clause: clause • AND term
+
+    AND  shift, and go to state 31
+
+    $default  reduce using rule 2 (query)
+
+
+State 15
+
+    5 clause: term •
+
+    $default  reduce using rule 5 (clause)
+
+
+State 16
+
+    7 term: basic_filter_boost •
+
+    $default  reduce using rule 7 (term)
+
+
+State 17
+
+   11 basic_filter_boost: basic_filter •
+   12                   | basic_filter • CARAT
+
+    CARAT  shift, and go to state 32
+
+    $default  reduce using rule 11 (basic_filter_boost)
+
+
+State 18
+
+   14 basic_filter: rangeExpr •
+
+    $default  reduce using rule 14 (basic_filter)
+
+
+State 19
+
+   21 rangeExpr: opCompare • STRING
+
+    STRING  shift, and go to state 33
+
+
+State 20
+
+   22 rangeExpr: rangeStart • boundVal RANGE_TO boundVal rangeEnd
+
+    STRING  shift, and go to state 34
+
+    $default  reduce using rule 33 (boundVal)
+
+    boundVal  go to state 35
+
+
+State 21
+
+   15 basic_filter: regexExpr •
+
+    $default  reduce using rule 15 (basic_filter)
+
+
+State 22
+
+   16 basic_filter: fuzzyExpr •
+
+    $default  reduce using rule 16 (basic_filter)
+
+
+State 23
+
+    8 term: NOT term •
+
+    $default  reduce using rule 8 (term)
+
+
+State 24
+
+    3 query: query • clause
+    4      | query • OR clause
+    9 term: LPAREN query • RPAREN
+   10     | LPAREN query • RPAREN CARAT
+
+    OR             shift, and go to state 29
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    RPAREN         shift, and go to state 36
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    clause              go to state 30
+    term                go to state 15
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 25
+
+   17 basic_filter: STRING OP_COLON • STRING
+   18             | STRING OP_COLON • rangeExpr
+   19             | STRING OP_COLON • regexExpr
+   20             | STRING OP_COLON • fuzzyExpr
+
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 37
+
+    rangeExpr   go to state 38
+    opCompare   go to state 19
+    rangeStart  go to state 20
+    regexExpr   go to state 39
+    fuzzyExpr   go to state 40
+
+
+State 26
+
+   35 fuzzyExpr: STRING TILDE •
+
+    $default  reduce using rule 35 (fuzzyExpr)
+
+
+State 27
+
+    0 $accept: topLevelQuery "end of file" •
+
+    $default  accept
+
+
+State 28
+
+    1 topLevelQuery: query "end of file" •
+
+    $default  reduce using rule 1 (topLevelQuery)
+
+
+State 29
+
+    4 query: query OR • clause
+
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    clause              go to state 41
+    term                go to state 15
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 30
+
+    3 query: query clause •
+    6 clause: clause • AND term
+
+    AND  shift, and go to state 31
+
+    $default  reduce using rule 3 (query)
+
+
+State 31
+
+    6 clause: clause AND • term
+
+    NOT            shift, and go to state 1
+    LPAREN         shift, and go to state 2
+    OP_EQUAL       shift, and go to state 3
+    OP_LESSTHAN    shift, and go to state 4
+    OP_LESSTHANEQ  shift, and go to state 5
+    OP_MORETHAN    shift, and go to state 6
+    OP_MORETHANEQ  shift, and go to state 7
+    RANGEIN_START  shift, and go to state 8
+    RANGEEX_START  shift, and go to state 9
+    REGEXPTERM     shift, and go to state 10
+    STRING         shift, and go to state 11
+
+    term                go to state 42
+    basic_filter_boost  go to state 16
+    basic_filter        go to state 17
+    rangeExpr           go to state 18
+    opCompare           go to state 19
+    rangeStart          go to state 20
+    regexExpr           go to state 21
+    fuzzyExpr           go to state 22
+
+
+State 32
+
+   12 basic_filter_boost: basic_filter CARAT •
+
+    $default  reduce using rule 12 (basic_filter_boost)
+
+
+State 33
+
+   21 rangeExpr: opCompare STRING •
+
+    $default  reduce using rule 21 (rangeExpr)
+
+
+State 34
+
+   32 boundVal: STRING •
+
+    $default  reduce using rule 32 (boundVal)
+
+
+State 35
+
+   22 rangeExpr: rangeStart boundVal • RANGE_TO boundVal rangeEnd
+
+    RANGE_TO  shift, and go to state 43
+
+
+State 36
+
+    9 term: LPAREN query RPAREN •
+   10     | LPAREN query RPAREN • CARAT
+
+    CARAT  shift, and go to state 44
+
+    $default  reduce using rule 9 (term)
+
+
+State 37
+
+   17 basic_filter: STRING OP_COLON STRING •
+   35 fuzzyExpr: STRING • TILDE
+
+    TILDE  shift, and go to state 26
+
+    $default  reduce using rule 17 (basic_filter)
+
+
+State 38
+
+   18 basic_filter: STRING OP_COLON rangeExpr •
+
+    $default  reduce using rule 18 (basic_filter)
+
+
+State 39
+
+   19 basic_filter: STRING OP_COLON regexExpr •
+
+    $default  reduce using rule 19 (basic_filter)
+
+
+State 40
+
+   20 basic_filter: STRING OP_COLON fuzzyExpr •
+
+    $default  reduce using rule 20 (basic_filter)
+
+
+State 41
+
+    4 query: query OR clause •
+    6 clause: clause • AND term
+
+    AND  shift, and go to state 31
+
+    $default  reduce using rule 4 (query)
+
+
+State 42
+
+    6 clause: clause AND term •
+
+    $default  reduce using rule 6 (clause)
+
+
+State 43
+
+   22 rangeExpr: rangeStart boundVal RANGE_TO • boundVal rangeEnd
+
+    STRING  shift, and go to state 34
+
+    $default  reduce using rule 33 (boundVal)
+
+    boundVal  go to state 45
+
+
+State 44
+
+   10 term: LPAREN query RPAREN CARAT •
+
+    $default  reduce using rule 10 (term)
+
+
+State 45
+
+   22 rangeExpr: rangeStart boundVal RANGE_TO boundVal • rangeEnd
+
+    RANGEIN_END  shift, and go to state 46
+    RANGEEX_END  shift, and go to state 47
+
+    rangeEnd  go to state 48
+
+
+State 46
+
+   30 rangeEnd: RANGEIN_END •
+
+    $default  reduce using rule 30 (rangeEnd)
+
+
+State 47
+
+   31 rangeEnd: RANGEEX_END •
+
+    $default  reduce using rule 31 (rangeEnd)
+
+
+State 48
+
+   22 rangeExpr: rangeStart boundVal RANGE_TO boundVal rangeEnd •
+
+    $default  reduce using rule 22 (rangeExpr)
