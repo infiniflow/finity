@@ -2,7 +2,8 @@ queue_rules:
   - name: default
     allow_inplace_checks: false
     queue_conditions:
-      - #approved-reviews-by>=1
-      - check-success = tests
+      - and:
+        - "#approved-reviews-by>=1"
+        - "check-success=tests"
     merge_conditions:
-      - check-success = tests
+      - "check-success=tests"
