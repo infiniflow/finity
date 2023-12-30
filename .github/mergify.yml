@@ -1,3 +1,12 @@
+pull_request_rules:
+  - name: "Automatic queue when CI passes and approved"
+    conditions:
+      - "#approved-reviews-by>=0"
+      - "check-success=tests"
+    actions:
+      queue:
+        merge_method: squash
+        update_method: rebase
 queue_rules:
   - name: default
     queue_conditions:
