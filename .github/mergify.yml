@@ -1,6 +1,5 @@
 queue_rules:
   - name: default
-    allow_inplace_checks: false
     queue_conditions:
       - and:
         - "#approved-reviews-by>=0"
