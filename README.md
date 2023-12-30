@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-    <b>The TEST REPO</b>
+    <b>TEST ONLY</b>
 </p>
 
 <h4 align="center">
