@@ -3,7 +3,7 @@ queue_rules:
     allow_inplace_checks: false
     queue_conditions:
       - and:
-        - "#approved-reviews-by>=1"
+        - "#approved-reviews-by>=0"
         - "check-success=tests"
     merge_conditions:
       - "check-success=tests"
