@@ -11,7 +11,7 @@ jobs:
     name: tests
     # https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution
     # https://github.com/orgs/community/discussions/26261
-    if: ${{ github.event != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'ci') }}
+    if: ${{ github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'ci') }}
     runs-on: ubuntu-latest
     steps:
     # https://github.com/hmarr/debug-action
@@ -20,9 +20,9 @@ jobs:
     - name: Show environment
       run: |
         echo "Workflow triggered by $GITHUB_EVENT_NAME"
-        echo "github.event=${{ toJson(github.event) }}"
-        echo "github.event.pull_request=${{ toJson(github.event.pull_request) }}"
-        echo "github.event.pull_request.labels.*.name=${{ join(github.event.pull_request.labels.*.name, ', ') }}"
+        if [[ ${{ github.event_name }} == 'pull_request' ]]; then
+          echo "PR labels: ${{ join(github.event.pull_request.labels.*.name, ', ') }}"
+        fi
 
     - name: Ensure workspace ownership
       run: echo "chown -R $USER $GITHUB_WORKSPACE" && sudo chown -R $USER $GITHUB_WORKSPACE
