@@ -20,6 +20,7 @@ jobs:
     - name: Show environment
       run: |
         echo "Workflow triggered by $GITHUB_EVENT_NAME"
+        echo "${{ toJson(github.event) }}"
         echo "${{ toJson(github.event.pull_request) }}"
         echo "${{ join(github.event.pull_request.labels.*.name, ', ') }}"
 
