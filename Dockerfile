@@ -1,6 +1,7 @@
 FROM ubuntu:23.10
 
 RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list
+RUN echo "hello"
 RUN apt update
 
 # Clang 17+ is required for C++20 modules. GCC is not supported.
