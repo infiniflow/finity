@@ -17,6 +17,12 @@ jobs:
     # https://github.com/hmarr/debug-action
     - uses: hmarr/debug-action@v2
 
+    - name: Show environment
+      run: |
+        echo $GITHUB_EVENT_NAME
+        echo ${{ github.event }}
+        echo ${{ github.event.pull_request.labels }}
+
     - name: Ensure workspace ownership
       run: echo "chown -R $USER $GITHUB_WORKSPACE" && sudo chown -R $USER $GITHUB_WORKSPACE
 
