@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened, edited ]
+
+jobs:
+  tests:
+    name: tests
+    # https://github.com/orgs/community/discussions/26261
+    if: contains(github.event.pull_request.labels.*.name, 'ci')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Ensure workspace ownership
+      run: echo "chown -R $USER $GITHUB_WORKSPACE" && sudo chown -R $USER $GITHUB_WORKSPACE
+
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+        ssh-key: ${{ secrets.MY_DEPLOY_KEY }}
