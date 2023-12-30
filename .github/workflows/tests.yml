@@ -20,9 +20,9 @@ jobs:
     - name: Show environment
       run: |
         echo "Workflow triggered by $GITHUB_EVENT_NAME"
-        echo "${{ toJson(github.event) }}"
-        echo "${{ toJson(github.event.pull_request) }}"
-        echo "${{ join(github.event.pull_request.labels.*.name, ', ') }}"
+        echo "github.event=${{ toJson(github.event) }}"
+        echo "github.event.pull_request=${{ toJson(github.event.pull_request) }}"
+        echo "github.event.pull_request.labels.*.name=${{ join(github.event.pull_request.labels.*.name, ', ') }}"
 
     - name: Ensure workspace ownership
       run: echo "chown -R $USER $GITHUB_WORKSPACE" && sudo chown -R $USER $GITHUB_WORKSPACE
