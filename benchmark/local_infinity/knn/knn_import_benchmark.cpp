@@ -39,7 +39,7 @@ using namespace infinity;
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        std::cout << "import sift or gist, with optional test_data_path (default to /infinity/test/data in docker)" << std::endl;
+        std::cout << "import sift or gist, with optional test_data_path (default to /infinity/test/data in docker) and optional infinity path (default to /tmp/infinity)" << std::endl;
         return 1;
     }
     bool sift = true;
@@ -49,6 +49,9 @@ int main(int argc, char *argv[]) {
     sift = strcmp(argv[1], "sift") == 0;
 
     std::string data_path = "/tmp/infinity";
+    if (argc >= 4) {
+      data_path = std::string(argv[3]);
+    }
 
     LocalFileSystem fs;
     if (fs.Exists(data_path)) {
