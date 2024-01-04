@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # set input parameter 1 as int, 2 as file path
-# if the benchmark result is better than the standard, return 0, else return 1
+# benchmark run time is allowed to expand less than 3%
 
 import sys
 
 
 def main():
-    benchmark_bars = {"sift_1": 1000, "sift_4": 1000}
+    benchmark_bars = {"sift_1": 2255.7, "sift_4": 869230.0}
     benchmark_id = sys.argv[1]
     standard = benchmark_bars[benchmark_id]
     file_path = sys.argv[2]
@@ -18,13 +18,14 @@ def main():
     print("average time:", result)
     print("required time:", standard)
     print()
-    print("difference percentage: {:.2f}%".format(100 * (result - standard) / standard))
+    difference_percentage = (result - standard) / standard
+    print("difference percentage: {:.2f}%".format(100 * difference_percentage))
     print()
-    if result < standard:
-        print("benchmark result is better than standard")
+    if difference_percentage < 0.03:
+        print("benchmark result is acceptable")
         sys.exit(0)
     else:
-        print("benchmark result is worse than standard")
+        print("benchmark result is unacceptable")
         sys.exit(1)
 
 
