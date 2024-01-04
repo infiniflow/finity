@@ -170,7 +170,7 @@ jobs:
 
       - name: Prepare sift dataset
         if: ${{ !cancelled() && !failure() }}
-        run: sudo chmod +x ./.github/workflows/check_benchmark_result.py && sudo mkdir -p test/data/benchmark && sudo ln -s $HOME/benchmark/sift1M test/data/benchmark/sift_1m
+        run: sudo chmod +x ./tools/ci_tools/check_benchmark_result.py && sudo mkdir -p test/data/benchmark && sudo ln -s $HOME/benchmark/sift1M test/data/benchmark/sift_1m
 
       - name: Import sift dataset
         if: ${{ !cancelled() && !failure() }}
@@ -182,7 +182,7 @@ jobs:
 
       - name: Benchmark sift check result
         if: ${{ !cancelled() && !failure() }}
-        run: ./.github/workflows/check_benchmark_result.py sift_1 $HOME/benchmark/benchmark_sift_1_thread.log
+        run: ./tools/ci_tools/check_benchmark_result.py sift_1 $HOME/benchmark/benchmark_sift_1_thread.log
 
       - name: Benchmark sift search 4 threads repeat 10 times
         if: ${{ !cancelled() && !failure() }}
@@ -190,4 +190,4 @@ jobs:
 
       - name: Benchmark sift check result
         if: ${{ !cancelled() && !failure() }}
-        run: ./.github/workflows/check_benchmark_result.py sift_4 $HOME/benchmark/benchmark_sift_4_threads.log
+        run: ./tools/ci_tools/check_benchmark_result.py sift_4 $HOME/benchmark/benchmark_sift_4_threads.log
