@@ -180,14 +180,14 @@ jobs:
         if: ${{ !cancelled() && !failure() }}
         run: echo $(date) "Benchmark sift search 1 thread average time:" $(echo "1 10" | ./cmake-build-release/benchmark/local_infinity/knn_query_benchmark sift 100 | awk '/Total cost/ {total+=$4; count+=1} END {print total/count}') >> $HOME/benchmark/benchmark_sift_1_thread.log
 
-      - name: Benchmark sift check result
-        if: ${{ !cancelled() && !failure() }}
-        run: ./tools/ci_tools/check_benchmark_result.py sift_1 $HOME/benchmark/benchmark_sift_1_thread.log
-
       - name: Benchmark sift search 4 threads repeat 10 times
         if: ${{ !cancelled() && !failure() }}
         run: echo $(date) "Benchmark sift search 4 threads average time:" $(echo "4 10" | ./cmake-build-release/benchmark/local_infinity/knn_query_benchmark sift 100 | awk '/Total cost/ {total+=$4; count+=1} END {print total/count}') >> $HOME/benchmark/benchmark_sift_4_threads.log
 
       - name: Benchmark sift check result
         if: ${{ !cancelled() && !failure() }}
+        run: ./tools/ci_tools/check_benchmark_result.py sift_1 $HOME/benchmark/benchmark_sift_1_thread.log
+
+      - name: Benchmark sift check result
+        if: ${{ !cancelled() }}
         run: ./tools/ci_tools/check_benchmark_result.py sift_4 $HOME/benchmark/benchmark_sift_4_threads.log
