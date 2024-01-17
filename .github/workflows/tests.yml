@@ -38,8 +38,6 @@ jobs:
       - name: Check out code
         if: ${{ !cancelled() && !failure() }}
         uses: actions/checkout@v3
-        with:
-          ssh-key: ${{ secrets.MY_DEPLOY_KEY }}
 
       - name: Start builder container
         if: ${{ !cancelled() && !failure() }}
@@ -103,8 +101,6 @@ jobs:
     - name: Check out code
       if: ${{ !cancelled() && !failure() }}
       uses: actions/checkout@v3
-      with:
-        ssh-key: ${{ secrets.MY_DEPLOY_KEY }}
 
     - name: Start builder container
       if: ${{ !cancelled() && !failure() }}
