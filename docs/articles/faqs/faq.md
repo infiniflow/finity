@@ -1,3 +1,8 @@
+---
+sidebar_position: 1
+slug: /faq
+---
+
 ## Extensive Reading: Frequently Asked Questions
 
 ## What is Retrieval-Augmented Generation?

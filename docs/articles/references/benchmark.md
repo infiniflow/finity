@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+slug: /benchmark
+---
 # Benchmark
 
 Infinity provides a Python script for benchmarking the SIFT1M and GIST1M datasets.

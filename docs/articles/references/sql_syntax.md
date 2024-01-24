@@ -1,3 +1,8 @@
+---
+sidebar_position: 4
+slug: /sql_syntax
+---
+
 # The sql syntax of infinity
 
 ## Conventions
