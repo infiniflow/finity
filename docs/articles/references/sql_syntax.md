@@ -7,25 +7,25 @@ slug: /sql_syntax
 
 ## Conventions
 
-The following conventions are used in the synopsis of a command: brackets ([ and ]) indicate optional parts. (In the synopsis of a Tcl command, question marks (?) are used instead, as is usual in Tcl.) Braces ({ and }) and vertical lines (|) indicate that you must choose one alternative. Dots (...) mean that the preceding element can be repeated.  
-Refer to [postgresql](https://www.postgresql.org/docs/9.1/notation.html#:~:text=The%20following%20conventions%20are%20used,you%20must%20choose%20one%20alternative.).
+The following conventions are used in the synopsis of a command: brackets indicate optional parts. (In the synopsis of a Tcl command, question marks (?) are used instead, as is usual in Tcl.) Braces and vertical lines (|) indicate that you must choose one alternative. Dots (...) mean that the preceding element can be repeated.  
+Refer to [postgresql](https://www.postgresql.org/docs/9.1/notation.html#:~:text=The%20following%20conventions%20are%20used,you%20must%20choose%20one%20alternative).
 
 ## Infinity syntax
 
 ### CREATE INDEX
 
-CREATE INDEX — define a new index
+`CREATE INDEX — define a new index`
 
 #### Synopsis
 
-```sql
+```
 CREATE INDEX [[IF NOT EXISTS] name] ON table_name (column_name[, ...]) USING method
 [WITH (index_parameter [= value][, ...])];
 ```
 
 #### Description
 
-<!-- TODO shenyushi -->
+
 
 #### Parameter
 
@@ -38,7 +38,7 @@ CREATE INDEX [[IF NOT EXISTS] name] ON table_name (column_name[, ...]) USING met
 * method  
     The name of the index method to be used. For example, knn index choices of vector column(ex: embedding(float, 128)) are `IVFFlat`, `IVFSQ8` and `Hnsw`.
 * column_name  
-    The name of a column to create an index on. // TODO shenyushi: multiple columns denote what ?
+    The name of a column to create an index on. 
 * expression  
     An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.
 * index_parameter  
@@ -46,8 +46,6 @@ CREATE INDEX [[IF NOT EXISTS] name] ON table_name (column_name[, ...]) USING met
 
 ##### Index Parameters
 
-<!-- TODO shenyushi
-such as: centroids_count, MetricType -->
 
 ### DROP INDEX
 
@@ -55,7 +53,7 @@ DROP INDEX — remove an index
 
 #### Synopsis
 
-```sql
+```
 DROP INDEX [IF EXISTS] name ON table_name;
 ```
 
@@ -63,18 +61,16 @@ DROP INDEX [IF EXISTS] name ON table_name;
 
 #### Synopsis
 
-```sql
+```
 DESCRIBE INDEX table_name;
 ```
 
 ### KNN SCAN
 
-<!-- TODO shenyushi -->
-<!-- #### Synopsis -->
 
 #### Example
 
-```sql
+```
 SELECT col1 FROM tbl1 SEARCH KNN(col2, [0.3, 0.3, 0.2, 0.2], 'float', 'l2', 2);
 SELECT col1 FROM tbl1 SEARCH KNN(col2, [0.3, 0.3, 0.2, 0.2], 'float', 'ip', 2);
 ```
